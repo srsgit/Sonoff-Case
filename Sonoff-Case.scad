@@ -4,6 +4,9 @@
 tolerance = 0.25;
 
 thickness = 0.82;
+
+base   = 1.6;
+
 width  = 43.0 + tolerance;
 depth  = 20.0 + tolerance;
 height = 60.0;
@@ -25,21 +28,21 @@ difference() {
     cube([width + thickness* 2, depth + thickness * 2, height], center = true);
 
     // Bottom step
-    translate([0,0,thickness]) {
+    translate([0,0,base]) {
         cube([stepWidth, stepDepth, height], center = true);
     };
 
     // Inner space
-    translate([0,0,thickness + stepHeight]) {
+    translate([0,0,base + stepHeight]) {
         cube([width, depth, height], center = true);
     };
     // Reset hole
-    translate([- width /2 + holeX, depth/2, -height/2 + thickness + holeZ + stepHeight]) {
+    translate([- width /2 + holeX, depth/2, -height/2 + base + holeZ + stepHeight]) {
         rotate([-90,0,0]) 
             cylinder(h=thickness * 4, d=holeDia, center=true, $fn = 32);
     }
     // Botton wire slot
-    translate([0,0,-thickness]) {
+    translate([0,0,-base]) {
         cube([slotWidth, slotHeight, height], center = true);
     };
 };
