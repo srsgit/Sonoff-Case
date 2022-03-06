@@ -18,7 +18,8 @@ stepHeight = 10.0;
 slotWidth  = 12.0;
 slotDepth = 4.0;
 
-bumpHeight = 0.2;
+bumpHeight = 2.0;
+bumpWidth  = 0.3;
 
 holeDia = 5.0;
 holeX   = 6.35;
@@ -37,15 +38,15 @@ difference() {
 
     // Inner space
     translate([0,0, (height/2 + stepHeight/2 + base/2 - bumpHeight/2)]) {
-        cube([width, depth, (height - stepHeight - base - bumpHeight)], center = true);
-    };
-    // Top Bump
-    translate([0,0, height]) {
-        cube([width, 
-              depth-bumpHeight*2, 
-              bumpHeight*2+tolerance], center = true);
+        #cube([width, depth, (height - stepHeight - base - bumpHeight)], center = true);
     };
     
+    // Top Bump
+    translate([0,0, height-bumpHeight/2]) {
+        cube([width, 
+              depth-bumpWidth*2, 
+              bumpHeight+tolerance], center = true);
+    };
     
     // Reset hole
     translate([- width /2 + holeX, depth/2, base + stepHeight + holeZ]) {
